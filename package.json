@@ -1,0 +1,21 @@
+{
+  "name": "bibimbeat-core",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "hardhat": "^2.6.4"
+  },
+  "dependencies": {
+    "@metis.io/hardhat-mvm": "^0.2.6",
+    "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "@openzeppelin/contracts": "^3.4.0",
+    "bs58": "^4.0.1",
+    "dotenv": "^10.0.0"
+  }
+}
