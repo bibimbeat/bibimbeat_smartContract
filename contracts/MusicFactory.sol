@@ -14,7 +14,7 @@ contract MusicFactory is ERC1155 {
     
     struct TokenStruct {
         uint256[] tokenIDs;
-        mapping(uint256 => b1ytes) URIs;
+        mapping(uint256 => bytes) URIs;
         mapping(uint256 => uint256) amount;
     }
 

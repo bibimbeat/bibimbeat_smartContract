@@ -1,4 +1,3 @@
-
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
@@ -7,14 +6,11 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol";
 // import "@openzeppelin/contracts/utils/introspection/IERC165.sol";
 
-interface updateOwnedTokenList {
-   function updateOwnedTokenList(uint256 tokenId, uint256 amount, address newOwner, address oldOwner) external
+interface UpdateOwnedToken {
+   function updateOwnedTokenList(uint256 tokenId, uint256 amount, address newOwner, address oldOwner) external;
 }
 
-
-
-
-contract MusicMarket is IERC1155Receiver, updateOwnedTokenList {
+contract MusicMarket is IERC1155Receiver{
         struct Trade {
         address poster;
         uint256 item;
@@ -22,6 +18,8 @@ contract MusicMarket is IERC1155Receiver, updateOwnedTokenList {
         uint price;
         bytes32 status; // Open, Executed, Cancelled
     }
+    
+    address factoryAddress;
     
     mapping(uint256 => Trade) public trades;
     
@@ -31,17 +29,19 @@ contract MusicMarket is IERC1155Receiver, updateOwnedTokenList {
     
     event TradeStatusChange(uint256 tradeCounter, bytes32 status);
     
+    // NFTs not minted not from our smart cotract should not pass
+    
     constructor(address _currencyTokenAddress, address _itemTokenAddress) {
         currencyToken = IERC20(_currencyTokenAddress);
         itemToken = IERC1155(_itemTokenAddress);
         tradeCounter = 0;
+        factoryAddress = _itemTokenAddress;
     }
     
 
     
     function openTrade(uint256 _item, uint256 _price, uint _amount) public {
         require(itemToken.balanceOf(msg.sender, _item) >= _amount, "insufficient amount of NFT!");
-        
         itemToken.safeTransferFrom(msg.sender, address(this), _item, _amount, "");
         trades[tradeCounter] = Trade(msg.sender, _item, _amount, _price, "OPEN");
         tradeCounter++;
@@ -54,6 +54,7 @@ contract MusicMarket is IERC1155Receiver, updateOwnedTokenList {
         currencyToken.transferFrom(msg.sender, trade.poster, trade.price);
         itemToken.safeTransferFrom(address(this), msg.sender, trade.item, trade.amount, "");
         trades[_tradeCounter].status = "EXECUTED";
+        UpdateOwnedToken(factoryAddress).updateOwnedTokenList(trade.item, trade.amount, msg.sender, trade.poster);
         emit TradeStatusChange(_tradeCounter, "EXECUTED");
     }
     
@@ -78,7 +79,7 @@ contract MusicMarket is IERC1155Receiver, updateOwnedTokenList {
     bytes calldata data
     )
     external
-    // override
+    override
     returns(bytes4)
     {
       return   this.onERC1155Received.selector;
@@ -92,7 +93,7 @@ function onERC1155BatchReceived(
     bytes calldata data
     )
     external
-    // override
+    override
     returns(bytes4)
     {
       return   this.onERC1155BatchReceived.selector;
