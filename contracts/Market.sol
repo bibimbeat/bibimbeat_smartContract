@@ -39,6 +39,9 @@ contract MusicMarket is IERC1155Receiver{
     }
     
 
+    //  Logged in EoA should be able to see tradeblock status of his MTs. mapping(eoa => tradeCounter[]);
+    
+    // when the trade is open, it should also adjust struct in MusicFactory.
     
     function openTrade(uint256 _item, uint256 _price, uint _amount) public {
         require(itemToken.balanceOf(msg.sender, _item) >= _amount, "insufficient amount of NFT!");
@@ -57,6 +60,8 @@ contract MusicMarket is IERC1155Receiver{
         UpdateOwnedToken(factoryAddress).updateOwnedTokenList(trade.item, trade.amount, msg.sender, trade.poster);
         emit TradeStatusChange(_tradeCounter, "EXECUTED");
     }
+    
+    //cancel trade should also shange state in Music Factory's amoutn state
     
     function cancelTrade(uint256 _tradeCounter) public {
         Trade memory trade = trades[_tradeCounter];

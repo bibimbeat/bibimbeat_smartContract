@@ -49,6 +49,10 @@ contract MusicFactory is ERC1155 {
     }
     
     //function below should only be called by the market logic. but for now, leave it this way.
+    // at the moment everyone can call this... it is a problem
+    
+    // Also, SetapproveForAll doesnot have amount parameter and not have time limit.
+    // Also...whatever we are doing here... we still cannot get access to tokens minted from other markets. 
     
     function updateOwnedTokenList(uint256 tokenId, uint256 amount, address newOwner, address oldOwner) external
     {
