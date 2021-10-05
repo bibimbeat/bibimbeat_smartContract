@@ -18,10 +18,10 @@ module.exports = {
       ovm: true,
     },
   },
-  solidity: "0.7.6",
+  solidity: "0.8.0",
 
   ovm: {
-    solcVersion: '0.7.6',
+    solcVersion: '0.8.0',
     optimizer: true,
     runs: 20
   }
