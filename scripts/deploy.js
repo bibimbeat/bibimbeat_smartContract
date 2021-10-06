@@ -19,7 +19,7 @@ async function main() {
   const musicFactoryAddress = musicFactory.address;
   console.log("Music Factory deployed to:", musicFactoryAddress);
 
-  const erc20Minter = await ERC20Minter.deploy("Bibimbeat", "BBB", 1000000000000000, '0x98cc800c4F5F16C00b506D29A470b04f6938384D'); // jihyun's rinkeby test account 
+  const erc20Minter = await ERC20Minter.deploy("Bibimbeat", "BBB", 100000000000000, '0x98cc800c4F5F16C00b506D29A470b04f6938384D'); // jihyun's rinkeby test account 
   await erc20Minter.deployed();
   const erc20MinterAddress = erc20Minter.address;
   console.log("ERC20 deployed to:", erc20MinterAddress);

@@ -19,6 +19,7 @@ contract MusicFactory is ERC1155 {
     mapping(address => TokenStruct) OwnedTokenList;
 
     constructor() ERC1155("")  {
+        _tokenId.increment();
     }
     
     function mintMusic(uint256 _amount, string memory _uri) public {
@@ -36,8 +37,8 @@ contract MusicFactory is ERC1155 {
         tokenIDs = OwnedTokenList[msg.sender].tokenIDs;
     }
     
-    function getTokenURI(uint256 tokenId) public view returns(bytes memory uri) {
-        uri = OwnedTokenList[msg.sender].URIs[tokenId];
+    function getTokenURI(address account, uint256 tokenId) public view returns(bytes memory uri) {
+        uri = OwnedTokenList[account].URIs[tokenId];
     }
     
     function getTokenAmount(uint256 tokenId) public view returns(uint256 amount) {

@@ -25,7 +25,7 @@ contract MusicMarket is IERC1155Receiver{
     
     IERC20 currencyToken;
     IERC1155 itemToken;
-    uint256 tradeCounter;
+    uint256 public tradeCounter;
     
     event TradeStatusChange(uint256 tradeCounter, bytes32 status);
     
