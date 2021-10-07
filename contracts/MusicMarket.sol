@@ -6,9 +6,9 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol";
 // import "@openzeppelin/contracts/utils/introspection/IERC165.sol";
 
-interface UpdateOwnedToken {
-   function updateOwnedTokenList(uint256 tokenId, uint256 amount, address newOwner, address oldOwner) external;
-}
+// interface UpdateOwnedToken {
+//    function updateOwnedTokenList(uint256 tokenId, uint256 amount, address newOwner, address oldOwner) external;
+// }
 
 contract MusicMarket is IERC1155Receiver{
         struct Trade {
@@ -18,8 +18,6 @@ contract MusicMarket is IERC1155Receiver{
         uint price;
         bytes32 status; // Open, Executed, Cancelled
     }
-    
-    address factoryAddress;
     
     mapping(uint256 => Trade) public trades;
     
@@ -35,7 +33,6 @@ contract MusicMarket is IERC1155Receiver{
         currencyToken = IERC20(_currencyTokenAddress);
         itemToken = IERC1155(_itemTokenAddress);
         tradeCounter = 0;
-        factoryAddress = _itemTokenAddress;
     }
     
 
@@ -57,7 +54,7 @@ contract MusicMarket is IERC1155Receiver{
         currencyToken.transferFrom(msg.sender, trade.poster, trade.price);
         itemToken.safeTransferFrom(address(this), msg.sender, trade.item, trade.amount, "");
         trades[_tradeCounter].status = "EXECUTED";
-        UpdateOwnedToken(factoryAddress).updateOwnedTokenList(trade.item, trade.amount, msg.sender, trade.poster);
+        // UpdateOwnedToken(factoryAddress).updateOwnedTokenList(trade.item, trade.amount, msg.sender, trade.poster);
         emit TradeStatusChange(_tradeCounter, "EXECUTED");
     }
     

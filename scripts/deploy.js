@@ -10,10 +10,8 @@ async function main() {
 
   const MusicFactory = await hre.ethers.getContractFactory("MusicFactory");
   const ERC20Minter = await hre.ethers.getContractFactory("ERC20Minter");
-
   const MusicMarket = await hre.ethers.getContractFactory("MusicMarket");
   
-  // const musicFactory = await MusicFactory.attach("0x5FbDB2315678afecb367f032d93F642f64180aa3");
   const musicFactory = await MusicFactory.deploy();
   await musicFactory.deployed();
   const musicFactoryAddress = musicFactory.address;
