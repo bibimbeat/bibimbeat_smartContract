@@ -9,7 +9,7 @@ const fs = require('fs');
 async function main() {
 
   const MusicFactory = await hre.ethers.getContractFactory("MusicFactory");
-  const ERC20Minter = await hre.ethers.getContractFactory("ERC20Minter");
+  // const ERC20Minter = await hre.ethers.getContractFactory("ERC20Minter");
   const MusicMarket = await hre.ethers.getContractFactory("MusicMarket");
   
   const musicFactory = await MusicFactory.deploy();
@@ -17,10 +17,14 @@ async function main() {
   const musicFactoryAddress = musicFactory.address;
   console.log("Music Factory deployed to:", musicFactoryAddress);
 
-  const erc20Minter = await ERC20Minter.deploy("Bibimbeat", "BBB", 100000000000000, '0x98cc800c4F5F16C00b506D29A470b04f6938384D'); // jihyun's rinkeby test account 
-  await erc20Minter.deployed();
-  const erc20MinterAddress = erc20Minter.address;
-  console.log("ERC20 deployed to:", erc20MinterAddress);
+  // const erc20Minter = await ERC20Minter.deploy("Bibimbeat", "BBB", 100000000000000, '0x98cc800c4F5F16C00b506D29A470b04f6938384D'); // jihyun's rinkeby test account 
+  // await erc20Minter.deployed();
+  
+  // const erc20MinterAddress = erc20Minter.address;
+  //if erc20 already exist:
+  const erc20MinterAddress = "0xF50326a72e6e96a76BA023e062d87677d00BAd7E";
+  
+  // console.log("ERC20 deployed to:", erc20MinterAddress);
 
   const musicMarket = await MusicMarket.deploy(erc20MinterAddress, musicFactoryAddress);
   await musicMarket.deployed();
