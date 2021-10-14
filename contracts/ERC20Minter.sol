@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 /**
  * @dev {ERC20} token, including:
@@ -15,7 +15,7 @@ import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
  *
  * _Available since v3.4._
  */
-contract ERC20Minter is ERC20Burnable {
+contract ERC20Minter is ERC20 {
     /**
      * @dev Mints `initialSupply` amount of token and transfers them to `owner`.
      *
