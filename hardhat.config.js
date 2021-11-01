@@ -11,6 +11,10 @@ module.exports = {
       url: process.env.rinkebyUrl,
       accounts: [process.env.privateKey],
     },
+    arbitrum_rinkeby: {
+      url: process.env.arbitrumRinkebyUrl,
+      accounts: [process.env.privateKey],
+    },
     metis: {
       url: process.env.metisUrl,
       accounts: [process.env.privateKey],

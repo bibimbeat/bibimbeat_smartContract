@@ -13,14 +13,14 @@ async function main() {
   const ERC20Minter = await hre.ethers.getContractFactory("ERC20Minter");
   const MusicMarket = await hre.ethers.getContractFactory("MusicMarket");
 
-  const totalSupply = hre.ethers.utils.parseEther("7000000");
+  const totalSupply = hre.ethers.utils.parseEther("7770000");
   
   const musicFactory = await MusicFactory.deploy();
   await musicFactory.deployed();
   const musicFactoryAddress = musicFactory.address;
   console.log("Music Factory deployed to:", musicFactoryAddress);
 
-  const erc20Minter = await ERC20Minter.deploy("Dalgona", "DAL", totalSupply, '0xE51716dB94ec43de4aa66E955f3fC941Cee84472'); // jihyun's rinkeby test account 
+  const erc20Minter = await ERC20Minter.deploy("Bibimbeat", "BBB", totalSupply, '0xE51716dB94ec43de4aa66E955f3fC941Cee84472'); // jihyun's rinkeby test account 
   await erc20Minter.deployed();
   
   // const erc20MinterAddress = erc20Minter.address;

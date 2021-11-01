@@ -39,7 +39,7 @@ contract MusicMarket is IERC1155Receiver{
         currencyToken = IERC20(_currencyTokenAddress);
         itemToken = IERC1155(_itemTokenAddress);
         tradeCounter = 0;
-        marketAddress = msg.sender;
+        marketAddress = msg.sender; // 
     }
     
 
@@ -60,7 +60,7 @@ contract MusicMarket is IERC1155Receiver{
         require(trade.amount >= _amount, "insufficient amount of NFT!");
         require(trade.status == "OPEN", "Trade is not open.");
         
-        uint256 totalPrice = trade.price.mul(_amount); // 200 * 450 = 90000
+        uint256 totalPrice = trade.price.mul(_amount); // 100 * 100 = 10000
         
         uint256 creatorFee = totalPrice.mul(25).div(1000); // 2250
         uint256 marketFee = totalPrice.mul(25).div(1000); // 2250
