@@ -18,15 +18,11 @@ module.exports = {
     metis: {
       url: process.env.metisUrl,
       accounts: [process.env.privateKey],
-      gasPrice: 15000000,
-      ovm: true,
     },
+    mumbai: {
+      url: process.env.mumbaiUrl,
+      accounts: [process.env.privateKey],
+    }
   },
-  solidity: "0.8.0",
-
-  ovm: {
-    solcVersion: '0.8.0',
-    optimizer: true,
-    runs: 20
-  }
+  solidity: "0.7.6",
 };

@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.7.6;
 
 import "@openzeppelin/contracts/token/ERC1155/IERC1155.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol";
-import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+import "@openzeppelin/contracts/math/SafeMath.sol";
 // import "@openzeppelin/contracts/utils/introspection/IERC165.sol";
 
 // interface UpdateOwnedToken {
@@ -15,7 +15,7 @@ contract MusicMarket is IERC1155Receiver{
      
      using SafeMath for uint256;
     
-        struct Trade {
+    struct Trade {
         address poster;
         address creator;
         uint256 item;

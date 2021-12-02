@@ -5,27 +5,21 @@
 // Runtime Environment's members available in the global scope.
 const hre = require("hardhat");
 const fs = require('fs');
-const BigNumber = require('bignumber.js');
 
 async function main() {
 
   const MusicFactory = await hre.ethers.getContractFactory("MusicFactory");
-  const ERC20Minter = await hre.ethers.getContractFactory("ERC20Minter");
   const MusicMarket = await hre.ethers.getContractFactory("MusicMarket");
-
-  const totalSupply = hre.ethers.utils.parseEther("7770000");
+  const ERC20Minter = await hre.ethers.getContractFactory("ERC20Minter");
+  const Airdrop = await hre.ethers.getContractFactory("Airdrop");
   
   const musicFactory = await MusicFactory.deploy();
   await musicFactory.deployed();
   const musicFactoryAddress = musicFactory.address;
   console.log("Music Factory deployed to:", musicFactoryAddress);
 
-  const erc20Minter = await ERC20Minter.deploy("Bibimbeat", "BBB", totalSupply, '0xE51716dB94ec43de4aa66E955f3fC941Cee84472'); // jihyun's rinkeby test account 
+  const erc20Minter = await ERC20Minter.deploy(); // jihyun's rinkeby test account 
   await erc20Minter.deployed();
-  
-  // const erc20MinterAddress = erc20Minter.address;
-  //if erc20 already exist:
-  // const erc20MinterAddress = "0xF50326a72e6e96a76BA023e062d87677d00BAd7E";
   const erc20Address = erc20Minter.address;
   console.log("ERC20 deployed to:", erc20Address);
 
@@ -33,12 +27,18 @@ async function main() {
   await musicMarket.deployed();
   const musicMarketAddress = musicMarket.address;
   console.log("Music Market deployed to:", musicMarketAddress);
+
+  const airdrop = await Airdrop.deploy(erc20Address);
+  await airdrop.deployed();
+  const airdropAddress = airdrop.address;
+  console.log("Airdrop deployed to:", airdropAddress);
   
   
   let address = {
     "musicFactory" : musicFactoryAddress,
     "erc20" : erc20Address,
-    "musicMarket" : musicMarketAddress
+    "musicMarket" : musicMarketAddress,
+    "airdrop" : airdropAddress,
   };
   let addressJSON = JSON.stringify(address);
   fs.writeFileSync("environment/ContractAddress.json", addressJSON);

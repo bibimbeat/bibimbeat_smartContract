@@ -1,7 +1,0 @@
-yield
-const tx = await gameItems.mint()
-const gameItems = await GameItems.attach("0xb760a4c3C623B1C3A15A6D612664a87EcB5571AC");
-const GameItems = await hre.ethers.getContractFactory("GameItems");
-const mint = await gameItems.mint();
-const gameItems = await GameItems.attach("0x3257FD14BF5cb5a8CB7FA7EFaf9C946C9314888F");
-const GameItems = await hre.ethers.getContractFactory("GameItems");
